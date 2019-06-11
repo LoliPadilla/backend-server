@@ -1,10 +1,13 @@
 
+var jwt = require('jsonwebtoken');
+var SEED = require('../config').SEED;
 
 
 // ====================================
 // Verificar Token
 // =====================================
-app.use('/', (req, res, next) => {
+
+exports.verificaToken = function (req, res, next) {
 
 
     var token = req.query.token;
@@ -17,8 +20,13 @@ app.use('/', (req, res, next) => {
                 errors: err
             })
         }
+        console.log(decoded);
+        req.usuario = decoded.usario;
+        next();
 
     });
 
-    next();
-});
+
+
+
+}
